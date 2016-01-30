@@ -21,6 +21,7 @@ abstract class AbstractQuery implements QueryInterface
     public function __construct(\oxLegacyDb $db, $hierachy, $changefreq)
     {
         $this->db = $db;
+        $this->db->setFetchMode(\oxDb::FETCH_MODE_ASSOC);
         $this->hierachy = $hierachy;
         $this->changefreq = $changefreq;
     }
