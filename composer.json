@@ -1,0 +1,29 @@
+{
+  "name": "ivoba/oxid-sitemap",
+  "type": "oxid-module",
+  "keywords": ["oxid", "modules", "eShop", "sitemap"],
+  "description": "generate a SiteMap",
+  "authors": [
+    {
+      "name": "Ivo Bathke",
+      "email": "mail@feednapi.net"
+    },
+    {
+      "name": "DIATOM Internet & Medien GmbH"
+    },
+    {
+      "name": "Proud Sourcing GmbH"
+    }
+  ],
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ivoba\\OxidSiteMap\\": "src"
+    }
+  }
+}
