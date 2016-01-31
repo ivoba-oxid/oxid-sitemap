@@ -67,8 +67,7 @@ class SiteMapGenerator
      */
     protected function createXmlFile($xml)
     {
-        $file = $this->config->getFilepath().'/'.$this->getFilename();
-        unlink($file);
+        $file = $this->config->getFilepath().'/'.$this->config->getFilename();
         $fp = fopen($file, "w+");
         fwrite($fp, $xml);
         fclose($fp);

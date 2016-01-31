@@ -34,6 +34,7 @@ abstract class AbstractQuery implements QueryInterface
         if ($result !== false && $result->recordCount() > 0) {
             while (!$result->EOF) {
                 $pages[] = $this->createPage($result);
+                $result->MoveNext();
             }
         }
 
@@ -42,8 +43,13 @@ abstract class AbstractQuery implements QueryInterface
 
     protected function createPage($result)
     {
+        $url = $result->fields['oxseourl'];
+        if (empty($url)) {
+            $url = $result->fields['oxstdurl'];
+        }
+
         return new Page(
-            $this->getSeoUrl($result->fields['OXID']),
+            $url,
             $this->hierachy,
             date('Y').'-'.date('m').'-'.date('d').'T'.date('h').':'.date('i').':'.date('s').'+00:00',
             $this->changefreq
@@ -57,10 +63,10 @@ abstract class AbstractQuery implements QueryInterface
                     oxseourl
                 FROM oxseo
                 WHERE
-                    oxobjectid = '".$oxid."' AND
-                    oxlang  = '0'
+                    oxobjectid = '".$oxid."'
                 LIMIT 1
                 ";
+        //todo AND lang oxlang  = '0'
 
         $result = $this->db->execute($sql);
         if ($result !== false && $result->recordCount() > 0) {

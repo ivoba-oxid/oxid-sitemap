@@ -1,23 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ivo
- * Date: 29.01.16
- * Time: 12:20
- */
 
 namespace Ivoba\OxidSiteMap\Query;
 
-
+/**
+ * Class Cms
+ * @package Ivoba\OxidSiteMap\Query
+ */
 class Cms extends AbstractQuery
 {
-    private $sql = "SELECT
-                        oxid,
-                        oxtitle
-                    FROM oxcontents
-                    WHERE
-                        oxactive = 1 AND
-                        oxfolder = 'CMSFOLDER_USERINFO'
+    /**
+     * @todo multilang AND oxseo.oxlang  = '0'
+     * @var string
+     */
+    private $sql = "SELECT oxid,oxtitle,oxstdurl,oxseourl FROM oxcontents
+                    JOIN
+                      oxseo
+                    ON
+                      (oxseo.OXOBJECTID = oxcontents.OXID)
+                    WHERE oxactive = 1 AND
+                          oxfolder = 'CMSFOLDER_USERINFO'
                     ORDER by oxtitle ASC";
 
 

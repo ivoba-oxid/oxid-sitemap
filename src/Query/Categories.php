@@ -13,8 +13,14 @@ class Categories extends AbstractQuery
                         oxid,
                         oxtitle,
                         oxdesc,
-                        oxlongdesc
+                        oxlongdesc,
+                        oxstdurl,
+                        oxseourl
                     FROM oxcategories
+                    JOIN
+                      oxseo
+                    ON
+                      (oxseo.OXOBJECTID = oxcategories.OXID)
                     WHERE
                         oxactive = 1 AND
                         oxhidden = 0

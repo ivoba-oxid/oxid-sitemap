@@ -16,4 +16,3 @@ $siteMapGenerator = new \Ivoba\OxidSiteMap\SiteMapGenerator($config, $queries);
 $siteMapGenerator->generate();
 
 echo '<a href="/'. $config->getFilename() .'" target="_blank">XML Datei betrachten</a>';
-

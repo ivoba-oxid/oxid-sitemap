@@ -2,6 +2,8 @@
 
 improved Google Sitemap Exporter for Oxid eShop, based on https://github.com/OXIDprojects/google_sitemap
 
+still WIP
+
 it embraces common code best practices:
 - composer
 - semver
@@ -19,6 +21,7 @@ it embraces common code best practices:
 - run 'composer require ivoba/oxid-sitemap' in modules dir
 - copy content of *copy_this* to your shop
 - edit sitemap_xml.php to your needs, if necessary
+- take care that your target file is writeable by the webserver
 
 ## Usage
 
