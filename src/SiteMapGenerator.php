@@ -3,6 +3,7 @@
 namespace Ivoba\OxidSiteMap;
 
 use Ivoba\OxidSiteMap\Entity\Config;
+use Ivoba\OxidSiteMap\Filter\FilterInterface;
 use Ivoba\OxidSiteMap\Query\QueryInterface;
 
 /**
@@ -20,17 +21,31 @@ class SiteMapGenerator
      * @var array[QueryInterface]
      */
     private $queries;
+    /**
+     * @var bool
+     */
+    private $lowerUrls;
+    /**
+     * @var array[FilterInterface]
+     */
+    private $filters;
 
     /**
      * @param Config $config
-     * @param array[QueryInterface] $queries
+     * @param array [QueryInterface] $queries
+     * @param bool $lowerUrls
+     * @param array [FilterInterface] $filters
      */
-    public function __construct(Config $config, array $queries)
+    public function __construct(Config $config, array $queries, $lowerUrls = false, array $filters = [])
     {
         $this->config = $config;
         foreach ($queries as $query) {
             $this->addQuery($query);
         }
+        foreach ($filters as $filter) {
+            $this->addFilter($filter);
+        }
+        $this->lowerUrls = $lowerUrls;
     }
 
     /**
@@ -41,9 +56,17 @@ class SiteMapGenerator
         $this->queries[] = $query;
     }
 
+    /**
+     * @param FilterInterface $filter
+     */
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->filters[] = $filter;
+    }
+
 
     /**
-     * @param array[QueryInterface] $pages
+     * @param array [QueryInterface] $pages
      * @return string
      */
     protected function generateXml($pages)
@@ -51,15 +74,26 @@ class SiteMapGenerator
         $xmlLines = [];
         $xmlLines[] = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($pages as $page) {
-            $xmlLines[] = '<url><loc>'.strtolower(
-                    $this->config->getSiteurl().'/'.$page->getUrl()
-                ).'</loc><priority>'.$page->getPriority().'</priority><lastmod>'.$page->getLastmod().
-                '</lastmod><changefreq>'.$page->getChangefreq().'</changefreq></url>';
-        }
 
+            foreach ($this->filters as $filter) {
+                if($filter->filter($page)){
+                    continue 2;
+                }
+            }
+
+            $url = $page->getUrl();
+            if ($this->lowerUrls) {
+                $url = strtolower($url);
+            }
+
+            $xmlLines[] = '<url><loc>'.$url.'</loc>
+                            <priority>'.$page->getPriority().'</priority>
+                            <lastmod>'.$page->getLastmod().'</lastmod>
+                            <changefreq>'.$page->getChangefreq().'</changefreq></url>';
+        }
         $xmlLines[] = '</urlset>';
 
-        return implode("\n", $xmlLines);
+        return implode('', $xmlLines);
     }
 
     /**
@@ -81,7 +115,7 @@ class SiteMapGenerator
         $pages = [];
 
         foreach ($this->queries as $query) {
-            $pages += $query->getPages();
+            $pages = array_merge($pages, $query->getPages());
         }
 
         $this->createXmlFile($this->generateXml($pages));
