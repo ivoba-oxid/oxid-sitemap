@@ -30,6 +30,10 @@ if you need lower urls set the 3rd param to true: SiteMapGenerator($config, $que
 ## Caution
 As oxid-esales/eshop is not on packagist by now, its not listed as composer dependency.  
 
+## Todo
+- compress sitemap
+- language support
+
 ## License
 
     This program is free software: you can redistribute it and/or modify

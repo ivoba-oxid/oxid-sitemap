@@ -13,6 +13,7 @@ $db = oxDb::getDb(\oxDb::FETCH_MODE_ASSOC);
 $queries = [
     new \Ivoba\OxidSiteMap\Query\Categories($db, $shopUrl, $hierachy = '0.8', $changefreq = 'weekly'),
     new \Ivoba\OxidSiteMap\Query\Cms($db, $shopUrl, $hierachy = '0.1', $changefreq = 'weekly'),
+    new \Ivoba\OxidSiteMap\Query\Tags($db, $shopUrl, $hierachy = '0.1', $changefreq = 'weekly'),
     new \Ivoba\OxidSiteMap\Query\Products($db, $shopUrl, $hierachy = '1.0', $changefreq = 'daily'),
 ];
 
