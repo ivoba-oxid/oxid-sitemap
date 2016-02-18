@@ -20,6 +20,7 @@ it embraces common code best practices:
 - copy content of *modules/vendor/ivoba/oxid-sitemap/copy_this* to your shop
 - edit sitemap_xml.php to your needs, if necessary
 - take care that your target file is writeable by the webserver
+- create a cronjob that calls http://yourshop.biz/sitemap_xml.php
 
 ## Usage
 
@@ -33,6 +34,7 @@ As oxid-esales/eshop is not on packagist by now, its not listed as composer depe
 ## Todo
 - compress sitemap
 - language support
+- option to split sitemap, create sitemap_split_xml.php
 
 ## License
 

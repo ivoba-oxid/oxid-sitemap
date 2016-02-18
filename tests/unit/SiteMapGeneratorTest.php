@@ -12,7 +12,7 @@ class SiteMapGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testConstruct()
     {
         $config = new Config('filepath', 'filename', 'siteurl');
-        //todo as soon as oxid core is available on packagist, moch legacyDb class and us all query classes
+        //todo as soon as oxid core is available on packagist, mock legacyDb class and us all query classes
         $categories = $this->prophesize(Categories::class);
         $generator = new SiteMapGenerator($config, [$categories->reveal()]);
 
