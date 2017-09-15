@@ -2,6 +2,7 @@
 
 namespace Ivoba\OxidSiteMap\Query;
 
+use Ivoba\OxidSiteMap\Entity\Config;
 use Ivoba\OxidSiteMap\Entity\Page;
 
 abstract class AbstractQuery implements QueryInterface
@@ -11,6 +12,7 @@ abstract class AbstractQuery implements QueryInterface
     protected $siteUrl;
     protected $hierachy;
     protected $changefreq;
+    protected $config;
 
     abstract public function getSql();
 
@@ -20,10 +22,10 @@ abstract class AbstractQuery implements QueryInterface
      * @param $hierachy
      * @param $changefreq
      */
-    public function __construct(\oxLegacyDb $db, $siteUrl, $hierachy, $changefreq)
+    public function __construct(\oxLegacyDb $db, Config $config, $hierachy, $changefreq)
     {
         $this->db = $db;
-        $this->siteUrl = $siteUrl;
+        $this->config = $config;
         $this->hierachy = $hierachy;
         $this->changefreq = $changefreq;
     }
@@ -51,7 +53,7 @@ abstract class AbstractQuery implements QueryInterface
         }
 
         return new Page(
-            $this->siteUrl.'/'.$url,
+            $this->config->getShopUrl().'/'.$url,
             $this->hierachy,
             date('Y').'-'.date('m').'-'.date('d').'T'.date('h').':'.date('i').':'.date('s').'+00:00',
             $this->changefreq

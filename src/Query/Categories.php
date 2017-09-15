@@ -23,7 +23,7 @@ class Categories extends AbstractQuery
                       (oxseo.OXOBJECTID = oxcategories.OXID)
                     WHERE
                         oxactive = 1 AND
-                        oxhidden = 0
+                        oxhidden = 0 %s
                     ORDER by oxtitle ASC";
 
 
@@ -32,6 +32,7 @@ class Categories extends AbstractQuery
      */
     public function getSql()
     {
+        $this->sql = sprintf($this->sql, $this->config->getLangQuery());
         return $this->sql;
     }
 
