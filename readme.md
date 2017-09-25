@@ -1,5 +1,7 @@
 # Google Sitemap Exporter
 
+[![Build Status][ico-travis]][link-travis]
+
 improved Google Sitemap Exporter for Oxid eShop, based on https://github.com/OXIDprojects/google_sitemap
 
 it embraces common code best practices:
@@ -15,8 +17,8 @@ it embraces common code best practices:
 
 ## Installation
 
-- run 'composer require ivoba/oxid-sitemap' in modules dir
-- copy content of *modules/vendor/ivoba/oxid-sitemap/copy_this* to your shop
+- run 'composer require ivoba-oxid/oxid-sitemap' in modules dir
+- copy content of *modules/vendor/ivoba-oxid/oxid-sitemap/copy_this* to your shop
 - edit sitemap_xml.php to your needs, if necessary
 - take care that your target file is writeable by the webserver
 - create a cronjob that calls http://yourshop.biz/sitemap_xml.php
@@ -49,3 +51,5 @@ As oxid-esales/eshop is not on packagist by now, its not listed as composer depe
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+[link-travis]: https://travis-ci.org/ivoba-oxid/oxid-sitemap
+[ico-travis]: https://img.shields.io/travis/ivoba-oxid/oxid-sitemap/master.svg?style=flat-square

@@ -1,5 +1,5 @@
 {
-  "name": "ivoba/oxid-sitemap",
+  "name": "ivoba-oxid/oxid-sitemap",
   "type": "oxid-module",
   "keywords": ["oxid", "modules", "eShop", "sitemap"],
   "description": "generate a SiteMap",
