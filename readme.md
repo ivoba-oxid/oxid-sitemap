@@ -6,7 +6,6 @@ it embraces common code best practices:
 - composer
 - semver
 - tests
-- travis
 - dependency injection
 - namespaces
 
@@ -33,7 +32,6 @@ As oxid-esales/eshop is not on packagist by now, its not listed as composer depe
 
 ## Todo
 - compress sitemap
-- language support
 - option to split sitemap, create sitemap_split_xml.php
 
 ## License

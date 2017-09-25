@@ -17,8 +17,9 @@ abstract class AbstractQuery implements QueryInterface
     abstract public function getSql();
 
     /**
+     * AbstractQuery constructor.
      * @param \oxLegacyDb $db
-     * @param $siteUrl
+     * @param Config $config
      * @param $hierachy
      * @param $changefreq
      */
@@ -30,6 +31,9 @@ abstract class AbstractQuery implements QueryInterface
         $this->changefreq = $changefreq;
     }
 
+    /**
+     * @return array
+     */
     public function getPages()
     {
         $pages = [];
@@ -45,6 +49,10 @@ abstract class AbstractQuery implements QueryInterface
         return $pages;
     }
 
+    /**
+     * @param $result
+     * @return Page
+     */
     protected function createPage($result)
     {
         $url = $result->fields['oxseourl'];

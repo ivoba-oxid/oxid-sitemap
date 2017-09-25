@@ -10,20 +10,20 @@ class Config
     private $shopUrl;
     private $sLangQuery;
 
-
     /**
      * Config constructor.
-     * @param $filepath
-     * @param $filename
+     * @param string $filepath
+     * @param string $filename
+     * @param string $shopUrl
+     * @param array $aLangParams
      */
-    public function __construct($filepath, $filename)
+    public function __construct($filepath, $filename, $shopUrl, $aLangParams = [])
     {
         $this->filepath = $filepath;
         $this->filename = $filename;
+        $this->shopUrl = $shopUrl;
 
-        $aLangParams    = \oxRegistry::getConfig()->getConfigParam('aLanguageParams');
-        $aActiveLangIds = array();
-
+        $aActiveLangIds = [];
         foreach ($aLangParams as $key=>$lang) {
             if ($lang['active']) {
                 $aActiveLangIds[] = $lang['baseId'];
@@ -41,15 +41,6 @@ class Config
     public function getShopUrl()
     {
         return $this->shopUrl;
-    }
-
-    /**
-     * @param mixed $shopUrl
-     */
-    public function setShopUrl($shopUrl)
-    {
-        $this->shopUrl = $shopUrl;
-        return $this;
     }
 
     /**
