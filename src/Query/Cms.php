@@ -9,7 +9,6 @@ namespace Ivoba\OxidSiteMap\Query;
 class Cms extends AbstractQuery
 {
     /**
-     * @todo multilang AND oxseo.oxlang  = '0'
      * @var string
      */
     private $sql = "SELECT oxid,oxtitle,oxstdurl,oxseourl FROM oxcontents
@@ -18,7 +17,7 @@ class Cms extends AbstractQuery
                     ON
                       (oxseo.OXOBJECTID = oxcontents.OXID)
                     WHERE oxactive = 1 AND
-                          oxfolder = 'CMSFOLDER_USERINFO'
+                          oxfolder = 'CMSFOLDER_USERINFO' %s
                     ORDER by oxtitle ASC";
 
 
@@ -27,6 +26,7 @@ class Cms extends AbstractQuery
      */
     public function getSql()
     {
+        $this->sql = sprintf($this->sql, $this->config->getLangQuery());
         return $this->sql;
     }
 

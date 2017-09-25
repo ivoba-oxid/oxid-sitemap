@@ -14,10 +14,9 @@ class Tags extends AbstractQuery
                         oxseo seo
                     WHERE
                         seo.oxseourl <> '' AND
-                        seo.oxstdurl LIKE '%=tag%' AND
+                        seo.oxstdurl LIKE '%%=tag%%' AND
                         seo.oxtype='dynamic' AND
-                        seo.oxexpired = 0 AND
-                        seo.oxlang = 0";
+                        seo.oxexpired = 0 %s";
 
 
     /**
@@ -25,6 +24,7 @@ class Tags extends AbstractQuery
      */
     public function getSql()
     {
+        $this->sql = sprintf($this->sql, $this->config->getLangQuery());
         return $this->sql;
     }
 
