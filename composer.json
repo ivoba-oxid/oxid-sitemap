@@ -3,7 +3,7 @@
   "type": "oxid-module",
   "keywords": ["oxid", "modules", "eShop", "sitemap"],
   "description": "generate a SiteMap",
-  "licence": "GPL",
+  "licence": "GPL-3.0",
   "authors": [
     {
       "name": "Ivo Bathke",
