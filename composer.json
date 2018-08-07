@@ -1,6 +1,6 @@
 {
   "name": "ivoba-oxid/oxid-sitemap",
-  "type": "oxid-module",
+  "type": "oxideshop-module",
   "keywords": ["oxid", "modules", "eShop", "sitemap"],
   "description": "generate a SiteMap",
   "licence": "GPL-3.0",
@@ -25,6 +25,11 @@
   "autoload": {
     "psr-4": {
       "Ivoba\\OxidSiteMap\\": "src"
+    }
+  },
+  "extra": {
+    "oxideshop": {
+      "target-directory": "ivoba/oxid-sitemap"
     }
   }
 }
