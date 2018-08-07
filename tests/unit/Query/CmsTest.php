@@ -1,17 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ivo
- * Date: 18.02.16
- * Time: 11:48
- */
+declare(strict_types=1);
 
 namespace Ivoba\OxidSiteMap\Tests\Query\Cms;
 
-
 use Ivoba\OxidSiteMap\Query\Cms;
+use PHPUnit\Framework\TestCase;
 
-class CmsTest extends \PHPUnit_Framework_TestCase
+class CmsTest extends TestCase
 {
 
     public function testGetPages()

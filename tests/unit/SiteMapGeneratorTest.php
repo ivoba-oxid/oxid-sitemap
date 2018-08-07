@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace Ivoba\OxidSiteMap\Tests\SiteMapGenerator;
 
 use Ivoba\OxidSiteMap\Entity\Config;
 use Ivoba\OxidSiteMap\Query\Categories;
 use Ivoba\OxidSiteMap\SiteMapGenerator;
+use PHPUnit\Framework\TestCase;
 
-class SiteMapGeneratorTest extends \PHPUnit_Framework_TestCase
+class SiteMapGeneratorTest extends TestCase
 {
-
     public function testConstruct()
     {
         $config = new Config('filepath', 'filename', 'siteurl');

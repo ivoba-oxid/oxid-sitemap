@@ -1,11 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Ivoba\OxidSiteMap\Tests\Filter\UrlFilter;
 
 use Ivoba\OxidSiteMap\Entity\Page;
 use Ivoba\OxidSiteMap\Filter\UrlFilter;
+use PHPUnit\Framework\TestCase;
 
-class UrlFilterTest extends \PHPUnit_Framework_TestCase
+class UrlFilterTest extends TestCase
 {
 
     public function testFilter()

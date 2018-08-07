@@ -12,8 +12,8 @@ it embraces common code best practices:
 - namespaces
 
 ## Requirements
-- Oxid eShop >= 4.9.6
-- PHP >= 5.5
+- Oxid eShop >= 6
+- PHP >= 7
 
 ## Installation
 
