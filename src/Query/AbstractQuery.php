@@ -4,6 +4,7 @@ namespace Ivoba\OxidSiteMap\Query;
 
 use Ivoba\OxidSiteMap\Entity\Config;
 use Ivoba\OxidSiteMap\Entity\Page;
+use OxidEsales\Eshop\Core\Database\Adapter\DatabaseInterface;
 
 abstract class AbstractQuery implements QueryInterface
 {
@@ -18,12 +19,12 @@ abstract class AbstractQuery implements QueryInterface
 
     /**
      * AbstractQuery constructor.
-     * @param \oxLegacyDb $db
+     * @param DatabaseInterface $db
      * @param Config $config
      * @param $hierachy
      * @param $changefreq
      */
-    public function __construct(\oxLegacyDb $db, Config $config, $hierachy, $changefreq)
+    public function __construct(DatabaseInterface $db, Config $config, $hierachy, $changefreq)
     {
         $this->db = $db;
         $this->config = $config;
