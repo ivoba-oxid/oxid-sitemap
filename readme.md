@@ -29,7 +29,8 @@ call http://yourshop.biz/sitemap_xml.php
 
 if you need lower urls set the 3rd param to true: SiteMapGenerator($config, $queries, true)
 
-Note: This module does not need to be enabled. It works right away-
+Note: This module does not need to be enabled. It works right away.  
+Instead of "oxideshop-module" we call this type "oxideshop-addon" since it doesnt need not be copied to source directory.
 
 ## Todo
 - password protect generate page

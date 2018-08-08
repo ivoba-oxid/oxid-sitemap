@@ -1,6 +1,6 @@
 {
   "name": "ivoba-oxid/oxid-sitemap",
-  "type": "oxideshop-module",
+  "type": "oxideshop-addon",
   "keywords": ["oxid", "modules", "eShop", "sitemap"],
   "description": "generate a SiteMap",
   "licence": "GPL-3.0",
