@@ -28,6 +28,11 @@
       "IvobaOxid\\OxidSiteMap\\": "../../../source/modules/ivoba/oxid-sitemap"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "IvobaOxid\\OxidSiteMap\\Tests\\": "src/tests"
+    }
+  },
   "extra": {
     "oxideshop": {
       "target-directory": "ivoba/oxid-sitemap"
