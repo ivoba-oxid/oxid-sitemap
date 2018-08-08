@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "IvobaOxid\\OxidSiteMap\\": "../../../source/modules/ivoba/jsonld"
+      "IvobaOxid\\OxidSiteMap\\": "../../../source/modules/ivoba/oxid-sitemap"
     }
   },
   "extra": {
