@@ -1,10 +1,10 @@
 <?php
 
-namespace Ivoba\OxidSiteMap;
+namespace IvobaOxid\OxidSiteMap;
 
-use Ivoba\OxidSiteMap\Entity\Config;
-use Ivoba\OxidSiteMap\Filter\FilterInterface;
-use Ivoba\OxidSiteMap\Query\QueryInterface;
+use IvobaOxid\OxidSiteMap\Entity\Config;
+use IvobaOxid\OxidSiteMap\Filter\FilterInterface;
+use IvobaOxid\OxidSiteMap\Query\QueryInterface;
 
 /**
  * Class SiteMapGenerator
