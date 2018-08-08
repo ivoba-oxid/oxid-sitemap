@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ivo
- * Date: 29.01.16
- * Time: 11:49
- */
 
-namespace Ivoba\OxidSiteMap\Query;
+namespace IvobaOxid\OxidSiteMap\Query;
 
 interface QueryInterface
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Ivoba\OxidSiteMap\Filter;
+namespace IvobaOxid\OxidSiteMap\Filter;
 
-use Ivoba\OxidSiteMap\Entity\Page;
+use IvobaOxid\OxidSiteMap\Entity\Page;
 
 /**
  * Class UrlFilter
- * @package Ivoba\OxidSiteMap\Filter
+ * @package IvobaOxid\OxidSiteMap\Filter
  */
 class UrlFilter implements FilterInterface
 {

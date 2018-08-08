@@ -1,10 +1,10 @@
 <?php
 
-namespace Ivoba\OxidSiteMap\Query;
+namespace IvobaOxid\OxidSiteMap\Query;
 
 /**
  * Class Tags
- * @package Ivoba\OxidSiteMap\Query
+ * @package IvobaOxid\OxidSiteMap\Query
  */
 class Tags extends AbstractQuery
 {

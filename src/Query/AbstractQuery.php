@@ -1,9 +1,9 @@
 <?php
 
-namespace Ivoba\OxidSiteMap\Query;
+namespace IvobaOxid\OxidSiteMap\Query;
 
-use Ivoba\OxidSiteMap\Entity\Config;
-use Ivoba\OxidSiteMap\Entity\Page;
+use IvobaOxid\OxidSiteMap\Entity\Config;
+use IvobaOxid\OxidSiteMap\Entity\Page;
 use OxidEsales\Eshop\Core\Database\Adapter\DatabaseInterface;
 
 abstract class AbstractQuery implements QueryInterface
@@ -39,11 +39,11 @@ abstract class AbstractQuery implements QueryInterface
     {
         $pages = [];
 
-        $result = $this->db->execute($this->getSql());
-        if ($result !== false && $result->recordCount() > 0) {
+        $result = $this->db->select($this->getSql());
+        if ($result !== false && $result->count() > 0) {
             while (!$result->EOF) {
                 $pages[] = $this->createPage($result);
-                $result->MoveNext();
+                $result->fetchRow();
             }
         }
 

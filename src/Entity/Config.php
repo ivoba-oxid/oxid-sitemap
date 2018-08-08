@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivoba\OxidSiteMap\Entity;
+namespace IvobaOxid\OxidSiteMap\Entity;
 
 class Config
 {

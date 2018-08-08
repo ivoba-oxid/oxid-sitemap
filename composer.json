@@ -25,12 +25,15 @@
   },
   "autoload": {
     "psr-4": {
-      "Ivoba\\OxidSiteMap\\": "src"
+      "IvobaOxid\\OxidSiteMap\\": "../../../source/modules/ivoba/jsonld"
     }
   },
   "extra": {
     "oxideshop": {
       "target-directory": "ivoba/oxid-sitemap"
+    },
+    "branch-alias": {
+        "dev-master": "2.0.x-dev"
     }
   }
 }

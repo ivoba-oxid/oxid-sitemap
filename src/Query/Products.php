@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivoba\OxidSiteMap\Query;
+namespace IvobaOxid\OxidSiteMap\Query;
 
-use Ivoba\OxidSiteMap\Entity\Page;
+use IvobaOxid\OxidSiteMap\Entity\Page;
 
 class Products extends AbstractQuery
 {

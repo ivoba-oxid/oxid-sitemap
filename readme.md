@@ -29,9 +29,6 @@ call http://yourshop.biz/sitemap_xml.php
 
 if you need lower urls set the 3rd param to true: SiteMapGenerator($config, $queries, true)
 
-## Caution
-As oxid-esales/eshop is not on packagist by now, its not listed as composer dependency.  
-
 ## Todo
 - compress sitemap
 - option to split sitemap, create sitemap_split_xml.php

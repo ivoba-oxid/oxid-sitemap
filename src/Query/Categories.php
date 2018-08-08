@@ -1,10 +1,10 @@
 <?php
 
-namespace Ivoba\OxidSiteMap\Query;
+namespace IvobaOxid\OxidSiteMap\Query;
 
 /**
  * Class Categories
- * @package Ivoba\OxidSiteMap\Query
+ * @package IvobaOxid\OxidSiteMap\Query
  */
 class Categories extends AbstractQuery
 {

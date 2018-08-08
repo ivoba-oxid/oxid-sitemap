@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ivo
- * Date: 29.01.16
- * Time: 11:36
- */
 
-namespace Ivoba\OxidSiteMap\Entity;
+namespace IvobaOxid\OxidSiteMap\Entity;
 
 
 class Page
