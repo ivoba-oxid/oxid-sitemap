@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Ivoba\OxidSiteMap\Tests\SiteMapGenerator;
+namespace IvobaOxid\OxidSiteMap\Tests\SiteMapGenerator;
 
-use Ivoba\OxidSiteMap\Entity\Config;
-use Ivoba\OxidSiteMap\Query\Categories;
-use Ivoba\OxidSiteMap\SiteMapGenerator;
+use IvobaOxid\OxidSiteMap\Entity\Config;
+use IvobaOxid\OxidSiteMap\Query\Categories;
+use IvobaOxid\OxidSiteMap\SiteMapGenerator;
 use PHPUnit\Framework\TestCase;
 
 class SiteMapGeneratorTest extends TestCase

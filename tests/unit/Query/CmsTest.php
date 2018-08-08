@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Ivoba\OxidSiteMap\Tests\Query\Cms;
+namespace IvobaOxid\OxidSiteMap\Tests\Query\Cms;
 
-use Ivoba\OxidSiteMap\Query\Cms;
+use IvobaOxid\OxidSiteMap\Query\Cms;
 use PHPUnit\Framework\TestCase;
 
 class CmsTest extends TestCase
