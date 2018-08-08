@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "IvobaOxid\\OxidSiteMap\\": "../../../source/modules/ivoba/oxid-sitemap"
+      "IvobaOxid\\OxidSiteMap\\": "src"
     }
   },
   "autoload-dev": {
@@ -34,9 +34,6 @@
     }
   },
   "extra": {
-    "oxideshop": {
-      "target-directory": "ivoba/oxid-sitemap"
-    },
     "branch-alias": {
         "dev-master": "2.0.x-dev"
     }

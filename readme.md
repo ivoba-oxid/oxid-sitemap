@@ -29,7 +29,10 @@ call http://yourshop.biz/sitemap_xml.php
 
 if you need lower urls set the 3rd param to true: SiteMapGenerator($config, $queries, true)
 
+Note: This module does not need to be enabled. It works right away-
+
 ## Todo
+- password protect generate page
 - compress sitemap
 - option to split sitemap, create sitemap_split_xml.php
 
