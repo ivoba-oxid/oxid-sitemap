@@ -17,8 +17,8 @@ it embraces common code best practices:
 
 ## Installation
 
-- run 'composer require ivoba-oxid/oxid-sitemap'
-- copy content of */vendor/ivoba-oxid/oxid-sitemap/copy_this* to your shop
+- run 'composer require ivoba-oxid/oxid-sitemap:2.0.x-dev'
+- copy 'sitemap_xml.php' from */vendor/ivoba-oxid/oxid-sitemap/copy_this* to /source/ directory
 - edit sitemap_xml.php to your needs, if necessary
 - take care that your target file is writeable by the webserver
 - create a cronjob that calls http://yourshop.biz/sitemap_xml.php
@@ -30,8 +30,7 @@ call http://yourshop.biz/sitemap_xml.php
 if you need lower urls set the 3rd param to true: SiteMapGenerator($config, $queries, true)
 
 Note: This module does not need to be enabled. It works right away.  
-Instead of "oxideshop-module" we call this type "oxideshop-addon" since it doesnt need not be copied to source directory.
-
+Instead of "oxideshop-module" we call this type "oxideshop-addon" since it doesnt need not be installed to source/modules/ directory.
 ## Todo
 - password protect generate page
 - compress sitemap
