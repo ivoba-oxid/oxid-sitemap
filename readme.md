@@ -18,7 +18,7 @@ it embraces common code best practices:
 ## Installation
 
 - run 'composer require ivoba-oxid/oxid-sitemap' in modules dir
-- copy content of */vendor/ivoba-oxid/oxid-sitemap/copy_this* to your shop root directory
+- copy 'sitemap_xml.php' from */vendor/ivoba-oxid/oxid-sitemap/copy_this* to /source/ directory
 - edit sitemap_xml.php to your needs, if necessary
 - take care that your target file is writeable by the webserver
 - create a cronjob that calls http://yourshop.biz/sitemap_xml.php
