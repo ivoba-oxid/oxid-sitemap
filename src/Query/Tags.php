@@ -14,7 +14,7 @@ class Tags extends AbstractQuery
                         oxseo seo
                     WHERE
                         seo.oxseourl <> '' AND
-                        seo.oxstdurl LIKE '%%=tag%%' AND
+                        seo.oxstdurl LIKE '%%=oetagstagcontroller%%' AND
                         seo.oxtype='dynamic' AND
                         seo.oxexpired = 0 %s";
 
