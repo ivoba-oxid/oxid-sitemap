@@ -4,18 +4,20 @@ namespace IvobaOxid\OxidSiteMap\Query;
 
 use IvobaOxid\OxidSiteMap\Entity\Page;
 
-class Products extends AbstractQuery
+class Variants extends AbstractQuery
 {
     /**
-     * gets all parent articles
+     * gets all variant articles
      * @var string
      */
     private $sql = "SELECT
                         oxart.oxid, oxart.oxtimestamp
                     FROM oxarticles as oxart
+                    LEFT OUTER JOIN oxarticles oxparent ON oxart.oxparentid = oxparent.oxid
                     WHERE
                         oxart.oxactive = 1
-                    AND oxart.oxparentid = ''
+                    AND oxart.oxparentid != ''
+                    AND oxparent.oxactive = 1
                     ORDER BY oxart.oxtitle ASC";
 
     /**
@@ -43,5 +45,4 @@ class Products extends AbstractQuery
     {
         return $this->sql;
     }
-
 }
