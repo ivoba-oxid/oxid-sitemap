@@ -9,7 +9,7 @@ use \OxidEsales\Eshop\Core\Registry;
 use \OxidEsales\Eshop\Core\DatabaseProvider;
 
 $aLangParams = Registry::getConfig()->getConfigParam('aLanguageParams');
-$shopUrl     = Registry::get("oxConfigFile")->getVar('sShopURL');
+$shopUrl     = Registry::get(\OxidEsales\Eshop\Core\ConfigFile::class)->getVar('sShopURL');
 $config      = new \IvobaOxid\OxidSiteMap\Entity\Config(__DIR__, 'sitemap.xml', $shopUrl, $aLangParams);
 
 $db = DatabaseProvider::getDb(DatabaseProvider::FETCH_MODE_ASSOC);
