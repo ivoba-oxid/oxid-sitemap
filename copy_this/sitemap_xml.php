@@ -15,6 +15,7 @@ $config      = new \IvobaOxid\OxidSiteMap\Entity\Config(__DIR__, 'sitemap.xml', 
 $db = DatabaseProvider::getDb(DatabaseProvider::FETCH_MODE_ASSOC);
 
 $queries = [
+    new \IvobaOxid\OxidSiteMap\Query\HomePage($config, $hierachy = '0.8', $changefreq = 'weekly'),
     new \IvobaOxid\OxidSiteMap\Query\Categories($db, $config, $hierachy = '0.8', $changefreq = 'weekly'),
     new \IvobaOxid\OxidSiteMap\Query\HiddenCategories($db, $config, $hierachy = '0.8', $changefreq = 'weekly'),
     new \IvobaOxid\OxidSiteMap\Query\Cms($db, $config, $hierachy = '0.1', $changefreq = 'weekly'),

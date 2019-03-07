@@ -1,5 +1,7 @@
 # Changelog
 
+### 2.2.0
+- added Homepage query
 ### 2.1.2
 - added CMSFOLDER_PRODUCTINFO to CMS query
 ### 2.1.1
