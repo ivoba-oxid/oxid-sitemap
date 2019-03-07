@@ -17,7 +17,7 @@ class Cms extends AbstractQuery
                     ON
                       (oxseo.OXOBJECTID = oxcontents.OXID)
                     WHERE oxactive = 1 AND
-                          oxfolder = 'CMSFOLDER_USERINFO' %s
+                          oxfolder IN ('CMSFOLDER_USERINFO', 'CMSFOLDER_PRODUCTINFO') %s
                     ORDER by oxtitle ASC";
 
 
