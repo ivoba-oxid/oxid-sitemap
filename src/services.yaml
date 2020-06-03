@@ -1,0 +1,59 @@
+parameters:
+  oxid_ivoba.sitemap.lower_urls: true
+services:
+  _defaults:
+    autowire: true
+
+  IvobaOxid\OxidSiteMap\Entity\Config:
+    arguments:
+      $filepath: '@=service("oxRegistry").getConfig().getConfigParam("sShopDir")'
+      $filename: 'sitemap.xml'
+      $shopUrl: '@=service("oxRegistry").get("\OxidEsales\Eshop\Core\ConfigFile::class")).getVar("sShopURL")'
+      $langQuery: '@=service("oxRegistry").getConfig().getConfigParam("aLanguageParams")'
+
+  IvobaOxid\OxidSiteMap\Query\HomePage:
+    arguments:
+      $hierachy: '0.8'
+      $changefreq: 'weekly'
+  IvobaOxid\OxidSiteMap\Query\Categories:
+    arguments:
+      $hierachy: '0.8'
+      $changefreq: 'weekly'
+  IvobaOxid\OxidSiteMap\Query\HiddenCategories:
+    arguments:
+      $hierachy: '0.8'
+      $changefreq: 'weekly'
+  IvobaOxid\OxidSiteMap\Query\Cms:
+    arguments:
+      $hierachy: '0.1'
+      $changefreq: 'weekly'
+  IvobaOxid\OxidSiteMap\Query\Tags:
+    arguments:
+      $hierachy: '0.1'
+      $changefreq: 'weekly'
+  IvobaOxid\OxidSiteMap\Query\Products:
+    arguments:
+      $hierachy: '1.0'
+      $changefreq: 'daily'
+
+  IvobaOxid\OxidSiteMap\Filter\UrlFilter:
+    arguments:
+      - '@=service("oxRegistry").get("\OxidEsales\Eshop\Core\ConfigFile::class")).getVar("sShopURL")/AGB/'
+
+  IvobaOxid\OxidSiteMap\SiteMapGenerator:
+    arguments:
+      $config: '@IvobaOxid\OxidSiteMap\Entity\Config'
+      $queries:
+        - '@IvobaOxid\OxidSiteMap\Query\HomePage'
+        - '@IvobaOxid\OxidSiteMap\Query\Categories'
+        - '@IvobaOxid\OxidSiteMap\Query\HiddenCategories'
+        - '@IvobaOxid\OxidSiteMap\Query\Cms'
+        - '@IvobaOxid\OxidSiteMap\Query\Tags'
+        - '@IvobaOxid\OxidSiteMap\Query\Products'
+      $lowerUrls: '%oxid_ivoba.sitemap.lower_urls%'
+      $filters:
+        - '@IvobaOxid\OxidSiteMap\Filter\UrlFilter'
+
+  IvobaOxid\OxidSiteMap\Commands\SiteMapCommand:
+    tags:
+      - { name: 'console.command' }

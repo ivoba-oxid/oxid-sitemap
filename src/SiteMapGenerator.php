@@ -12,7 +12,6 @@ use IvobaOxid\OxidSiteMap\Query\QueryInterface;
  */
 class SiteMapGenerator
 {
-
     /**
      * @var Config
      */
@@ -64,19 +63,18 @@ class SiteMapGenerator
         $this->filters[] = $filter;
     }
 
-
     /**
      * @param array [QueryInterface] $pages
      * @return string
      */
     protected function generateXml($pages)
     {
-        $xmlLines = [];
+        $xmlLines   = [];
         $xmlLines[] = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($pages as $page) {
 
             foreach ($this->filters as $filter) {
-                if($filter->filter($page)){
+                if ($filter->filter($page)) {
                     continue 2;
                 }
             }
@@ -102,7 +100,7 @@ class SiteMapGenerator
     protected function createXmlFile($xml)
     {
         $file = $this->config->getFilepath().'/'.$this->config->getFilename();
-        $fp = fopen($file, "w+");
+        $fp   = fopen($file, "w+");
         fwrite($fp, $xml);
         fclose($fp);
     }
@@ -119,5 +117,13 @@ class SiteMapGenerator
         }
 
         $this->createXmlFile($this->generateXml($pages));
+    }
+
+    /**
+     * @return Config
+     */
+    public function getConfig(): Config
+    {
+        return $this->config;
     }
 }

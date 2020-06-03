@@ -2,18 +2,9 @@
 
 [![Build Status][ico-travis]][link-travis]
 
-improved Google Sitemap Exporter for Oxid eShop, based on https://github.com/OXIDprojects/google_sitemap
-
-it embraces common code best practices:
-- composer
-- semver
-- tests
-- dependency injection
-- namespaces
-
 ## Requirements
-- Oxid eShop >= 6
-- PHP >= 7
+- Oxid eShop >= 6.2
+- PHP >= 7.1
 
 ## Installation
 
@@ -36,6 +27,9 @@ Instead of "oxideshop-module" we call this type "oxideshop-addon" since it doesn
 - password protect generate page
 - compress sitemap
 - option to split sitemap, create sitemap_split_xml.php
+
+## Credits
+based on https://github.com/OXIDprojects/google_sitemap
 
 ## License
 

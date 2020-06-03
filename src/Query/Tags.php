@@ -8,7 +8,6 @@ namespace IvobaOxid\OxidSiteMap\Query;
  */
 class Tags extends AbstractQuery
 {
-
     private $sql = "SELECT seo.oxseourl
                     FROM
                         oxseo seo
@@ -18,13 +17,10 @@ class Tags extends AbstractQuery
                         seo.oxtype='dynamic' AND
                         seo.oxexpired = 0 %s";
 
-
-    /**
-     * @return string
-     */
-    public function getSql()
+    public function getSql(): string
     {
         $this->sql = sprintf($this->sql, $this->config->getLangQuery());
+
         return $this->sql;
     }
 

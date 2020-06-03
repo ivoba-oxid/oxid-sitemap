@@ -20,13 +20,10 @@ class Cms extends AbstractQuery
                           oxfolder IN ('CMSFOLDER_USERINFO', 'CMSFOLDER_PRODUCTINFO') %s
                     ORDER by oxtitle ASC";
 
-
-    /**
-     * @return string
-     */
-    public function getSql()
+    public function getSql(): string
     {
         $this->sql = sprintf($this->sql, $this->config->getLangQuery());
+
         return $this->sql;
     }
 

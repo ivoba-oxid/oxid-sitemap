@@ -4,11 +4,10 @@ namespace IvobaOxid\OxidSiteMap\Entity;
 
 class Config
 {
-
     private $filepath;
     private $filename;
     private $shopUrl;
-    private $sLangQuery;
+    private $langQuery;
 
     /**
      * Config constructor.
@@ -17,55 +16,42 @@ class Config
      * @param string $shopUrl
      * @param array $aLangParams
      */
-    public function __construct($filepath, $filename, $shopUrl, $aLangParams = [])
+    public function __construct(string $filepath, string $filename, string $shopUrl, array $aLangParams = [])
     {
         $this->filepath = $filepath;
         $this->filename = $filename;
-        $this->shopUrl = $shopUrl;
+        $this->shopUrl  = $shopUrl;
 
         $aActiveLangIds = [];
-        foreach ($aLangParams as $key=>$lang) {
+        foreach ($aLangParams as $key => $lang) {
             if ($lang['active']) {
                 $aActiveLangIds[] = $lang['baseId'];
             }
         }
 
         if ($aActiveLangIds && count($aActiveLangIds) > 0) {
-            $this->sLangQuery = ' AND OXLANG IN (' . implode(',', $aActiveLangIds) . ')';
+            $this->langQuery = ' AND OXLANG IN ('.implode(',', $aActiveLangIds).')';
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getShopUrl()
+    public function getShopUrl(): string
     {
         return $this->shopUrl;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLangQuery()
+    public function getLangQuery(): string
     {
         return $this->sLangQuery;
     }
 
 
-    /**
-     * @return mixed
-     */
-    public function getFilepath()
+    public function getFilepath(): string
     {
         return $this->filepath;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
-
 }

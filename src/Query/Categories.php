@@ -26,14 +26,10 @@ class Categories extends AbstractQuery
                         oxhidden = 0 %s
                     ORDER by oxtitle ASC";
 
-
-    /**
-     * @return string
-     */
-    public function getSql()
+    public function getSql(): string
     {
         $this->sql = sprintf($this->sql, $this->config->getLangQuery());
+
         return $this->sql;
     }
-
 }

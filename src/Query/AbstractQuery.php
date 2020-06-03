@@ -15,20 +15,20 @@ abstract class AbstractQuery implements QueryInterface
     protected $changefreq;
     protected $config;
 
-    abstract public function getSql();
+    abstract public function getSql(): string;
 
     /**
      * AbstractQuery constructor.
      * @param DatabaseInterface $db
      * @param Config $config
-     * @param $hierachy
-     * @param $changefreq
+     * @param string $hierachy
+     * @param string $changefreq
      */
-    public function __construct(DatabaseInterface $db, Config $config, $hierachy, $changefreq)
+    public function __construct(DatabaseInterface $db, Config $config, string $hierachy, string $changefreq)
     {
-        $this->db = $db;
-        $this->config = $config;
-        $this->hierachy = $hierachy;
+        $this->db         = $db;
+        $this->config     = $config;
+        $this->hierachy   = $hierachy;
         $this->changefreq = $changefreq;
     }
 

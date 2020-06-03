@@ -7,7 +7,6 @@ use IvobaOxid\OxidSiteMap\Entity\Page;
 
 class HomePage implements QueryInterface
 {
-    protected $siteUrl;
     protected $hierachy;
     protected $changefreq;
     protected $config;

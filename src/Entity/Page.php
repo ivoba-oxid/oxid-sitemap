@@ -5,7 +5,6 @@ namespace IvobaOxid\OxidSiteMap\Entity;
 
 class Page
 {
-
     private $url;
     private $priority;
     private $lastmod;
@@ -13,49 +12,36 @@ class Page
 
     /**
      * Page constructor.
-     * @param $url
-     * @param $priority
-     * @param $lastmod
-     * @param $changefreq
+     * @param string $url
+     * @param string $priority
+     * @param string $lastmod
+     * @param string $changefreq
      */
-    public function __construct($url, $priority, $lastmod, $changefreq)
+    public function __construct(string $url, string $priority, string $lastmod, string $changefreq)
     {
-        $this->url = $url;
-        $this->priority = $priority;
-        $this->lastmod = $lastmod;
+        $this->url        = $url;
+        $this->priority   = $priority;
+        $this->lastmod    = $lastmod;
         $this->changefreq = $changefreq;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPriority()
+    public function getPriority(): string
     {
         return $this->priority;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLastmod()
+    public function getLastmod(): string
     {
         return $this->lastmod;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChangefreq()
+    public function getChangefreq(): string
     {
         return $this->changefreq;
     }
-
 }

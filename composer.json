@@ -1,6 +1,6 @@
 {
   "name": "ivoba-oxid/oxid-sitemap",
-  "type": "oxideshop-addon",
+  "type": "oxideshop-module",
   "keywords": ["oxid", "modules", "eShop", "sitemap"],
   "description": "generate a SiteMap",
   "licence": "GPL-3.0",
@@ -17,8 +17,8 @@
     }
   ],
   "require": {
-    "php": ">=7",
-    "oxid-esales/oxideshop-ce": "^v6.0"
+    "php": ">=7.1",
+    "oxid-esales/oxideshop-ce": "^v6.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^6"
@@ -35,7 +35,7 @@
   },
   "extra": {
     "branch-alias": {
-        "dev-master": "2.2.x-dev"
+        "dev-master": "3.0.x-dev"
     }
   }
 }

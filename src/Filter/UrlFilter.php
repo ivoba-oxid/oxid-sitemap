@@ -17,7 +17,7 @@ class UrlFilter implements FilterInterface
 
     /**
      * UrlFilter constructor.
-     * @param $urls
+     * @param array $urls
      */
     public function __construct(array $urls)
     {

@@ -26,11 +26,7 @@ class HiddenCategories extends AbstractQuery
                         oxhidden = 1
                     ORDER by oxtitle ASC";
 
-
-    /**
-     * @return string
-     */
-    public function getSql()
+    public function getSql(): string
     {
         return $this->sql;
     }

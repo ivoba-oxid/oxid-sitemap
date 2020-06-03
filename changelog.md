@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0
+- raised version to Oxid 6.2
+- made the module a oxid-module not an addon, we need the DI support
+- added SiteMapCommand
 ### 2.2.0
 - added Homepage query
 ### 2.1.2

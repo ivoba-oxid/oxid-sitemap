@@ -38,10 +38,7 @@ class Variants extends AbstractQuery
         );
     }
 
-    /**
-     * @return string
-     */
-    public function getSql()
+    public function getSql(): string
     {
         return $this->sql;
     }
