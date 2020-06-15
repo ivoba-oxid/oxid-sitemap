@@ -8,23 +8,32 @@
 
 ## Installation
 
-- run 'composer require ivoba-oxid/oxid-sitemap'
-- copy 'sitemap_xml.php' from */vendor/ivoba-oxid/oxid-sitemap/copy_this* to /source/ directory
-- edit sitemap_xml.php to your needs, if necessary
+Install via composer:
+
+    composer require ivoba-oxid/oxid-sitemap
+
+Activate the plugin:
+
+    vendor/bin/oe-console oe:module:activate ivoba_sitemap
+
+## Usage
+Recommended is usage as console command.
+### Console
+Run:
+
+    vendor/bin/oe-console ivoba-oxid:sitemap:generate
+
+### Browser
+Post installation:  
+- copy 'sitemap_xml.php' from */vendor/ivoba-oxid/oxid-sitemap/copy_this* to /source/ directory:  
+  `cp vendor/ivoba-oxid/oxid-sitemap/copy_this/sitemap_xml.php source/sitemap_xml.php`
 - take care that your target file is writeable by the webserver
 - create a cronjob that calls http://yourshop.biz/sitemap_xml.php
 
-## Usage
-
-call http://yourshop.biz/sitemap_xml.php
-
-if you need lower urls set the 3rd param to true: SiteMapGenerator($config, $queries, true)
-
-Note: This module does not need to be enabled. It works right away.  
-Instead of "oxideshop-module" we call this type "oxideshop-addon" since it doesnt need not be copied to source directory.
+Sitemap generation can be adjusted by overriding service definition in a module or your projects services.yaml.  
 
 ## Todo
-- password protect generate page
+- password protect generate page via browser
 - compress sitemap
 - option to split sitemap, create sitemap_split_xml.php
 

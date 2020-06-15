@@ -5,7 +5,7 @@ namespace IvobaOxid\OxidSiteMap\Query;
 interface QueryInterface
 {
     /**
-     * @return [Page]
+     * @return Page[]
      */
     public function getPages();
 }

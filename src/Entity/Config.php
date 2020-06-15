@@ -8,29 +8,31 @@ class Config
     private $filename;
     private $shopUrl;
     private $langQuery;
+    private $langIds;
 
     /**
      * Config constructor.
      * @param string $filepath
      * @param string $filename
      * @param string $shopUrl
-     * @param array $aLangParams
+     * @param array $langParams
      */
-    public function __construct(string $filepath, string $filename, string $shopUrl, array $aLangParams = [])
+    public function __construct(string $filepath, string $filename, string $shopUrl, array $langParams = [])
     {
         $this->filepath = $filepath;
         $this->filename = $filename;
         $this->shopUrl  = $shopUrl;
 
         $aActiveLangIds = [];
-        foreach ($aLangParams as $key => $lang) {
+        foreach ($langParams as $key => $lang) {
             if ($lang['active']) {
                 $aActiveLangIds[] = $lang['baseId'];
+                $this->langIds[] = $lang['baseId'];
             }
         }
 
         if ($aActiveLangIds && count($aActiveLangIds) > 0) {
-            $this->langQuery = ' AND OXLANG IN ('.implode(',', $aActiveLangIds).')';
+            $this->langQuery = ' AND OXLANG IN (' . implode(',', $aActiveLangIds) . ')';
         }
     }
 
@@ -41,9 +43,16 @@ class Config
 
     public function getLangQuery(): string
     {
-        return $this->sLangQuery;
+        return $this->langQuery;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLangIds()
+    {
+        return $this->langIds;
+    }
 
     public function getFilepath(): string
     {

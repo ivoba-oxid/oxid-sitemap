@@ -6,41 +6,48 @@ services:
 
   IvobaOxid\OxidSiteMap\Entity\Config:
     arguments:
-      $filepath: '@=service("oxRegistry").getConfig().getConfigParam("sShopDir")'
+      $filepath: '@=service("OxidEsales\\Eshop\\Core\\Config").getConfigParam("sShopDir")'
       $filename: 'sitemap.xml'
-      $shopUrl: '@=service("oxRegistry").get("\OxidEsales\Eshop\Core\ConfigFile::class")).getVar("sShopURL")'
-      $langQuery: '@=service("oxRegistry").getConfig().getConfigParam("aLanguageParams")'
+      $shopUrl: '@=service("OxidEsales\\Eshop\\Core\\Config").getConfigParam("sShopURL")'
+      $langParams: '@=service("OxidEsales\\Eshop\\Core\\Config").getConfigParam("aLanguageParams")'
 
   IvobaOxid\OxidSiteMap\Query\HomePage:
     arguments:
-      $hierachy: '0.8'
+      $hierarchy: '0.8'
       $changefreq: 'weekly'
   IvobaOxid\OxidSiteMap\Query\Categories:
     arguments:
-      $hierachy: '0.8'
+      $hierarchy: '0.8'
       $changefreq: 'weekly'
   IvobaOxid\OxidSiteMap\Query\HiddenCategories:
     arguments:
-      $hierachy: '0.8'
+      $hierarchy: '0.8'
       $changefreq: 'weekly'
   IvobaOxid\OxidSiteMap\Query\Cms:
     arguments:
-      $hierachy: '0.1'
+      $hierarchy: '0.1'
       $changefreq: 'weekly'
   IvobaOxid\OxidSiteMap\Query\Tags:
     arguments:
-      $hierachy: '0.1'
+      $hierarchy: '0.1'
       $changefreq: 'weekly'
   IvobaOxid\OxidSiteMap\Query\Products:
     arguments:
-      $hierachy: '1.0'
+      $hierarchy: '1.0'
       $changefreq: 'daily'
+#  IvobaOxid\OxidSiteMap\Query\Variants:
+#    arguments:
+#      $hierarchy: '1.0'
+#      $changefreq: 'daily'
 
   IvobaOxid\OxidSiteMap\Filter\UrlFilter:
     arguments:
-      - '@=service("oxRegistry").get("\OxidEsales\Eshop\Core\ConfigFile::class")).getVar("sShopURL")/AGB/'
+      $shopUrl: '@=service("OxidEsales\\Eshop\\Core\\Config").getConfigParam("sShopURL")'
+      $urls:
+        - '/AGB/'
 
   IvobaOxid\OxidSiteMap\SiteMapGenerator:
+    public: true
     arguments:
       $config: '@IvobaOxid\OxidSiteMap\Entity\Config'
       $queries:
@@ -50,10 +57,13 @@ services:
         - '@IvobaOxid\OxidSiteMap\Query\Cms'
         - '@IvobaOxid\OxidSiteMap\Query\Tags'
         - '@IvobaOxid\OxidSiteMap\Query\Products'
+#        - '@IvobaOxid\OxidSiteMap\Query\Variants'
       $lowerUrls: '%oxid_ivoba.sitemap.lower_urls%'
       $filters:
         - '@IvobaOxid\OxidSiteMap\Filter\UrlFilter'
 
   IvobaOxid\OxidSiteMap\Commands\SiteMapCommand:
+    class: IvobaOxid\OxidSiteMap\Commands\SiteMapCommand
+    public: true
     tags:
-      - { name: 'console.command' }
+      - { name: 'console.command', command: 'ivoba-oxid:sitemap:generate' }

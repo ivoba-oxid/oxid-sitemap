@@ -2,33 +2,28 @@
 
 namespace IvobaOxid\OxidSiteMap\Query;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+
 /**
  * Class HiddenCategories
  * @package IvobaOxid\OxidSiteMap\Query
  */
 class HiddenCategories extends AbstractQuery
 {
-
-    private $sql = "SELECT
-                        oxid,
-                        oxtitle,
-                        oxdesc,
-                        oxlongdesc,
-                        oxstdurl,
-                        oxseourl
-                    FROM oxcategories
-                    JOIN
-                      oxseo
-                    ON
-                      (oxseo.OXOBJECTID = oxcategories.OXID)
-                    WHERE
-                        oxactive = 1 AND
-                        oxhidden = 1
-                    ORDER by oxtitle ASC";
-
-    public function getSql(): string
+    public function getQuery(QueryBuilder $queryBuilder): QueryBuilder
     {
-        return $this->sql;
-    }
+        $queryBuilder->select('oxid', 'oxtitle', 'oxdesc', 'oxlongdesc', 'oxseo.oxstdurl', 'oxseo.oxseourl')
+                     ->from('oxcategories')
+                     ->join('oxcategories', 'oxseo', 'oxseo', 'oxseo.OXOBJECTID = oxcategories.OXID')
+                     ->where('oxactive = :active', 'oxhidden = :hidden')
+                     ->andWhere('oxlang IN (:langIds)')
+                     ->orderBy('oxtitle', 'ASC')
+                     ->setParameters([
+                         'active'  => 1,
+                         'hidden'  => 0,
+                         'langIds' => $this->config->getLangIds(),
+                     ]);
 
+        return $queryBuilder;
+    }
 }

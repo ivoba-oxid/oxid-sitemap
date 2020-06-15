@@ -7,20 +7,20 @@ use IvobaOxid\OxidSiteMap\Entity\Page;
 
 class HomePage implements QueryInterface
 {
-    protected $hierachy;
+    protected $hierarchy;
     protected $changefreq;
     protected $config;
 
     /**
      * HomePage constructor.
      * @param Config $config
-     * @param $hierachy
+     * @param $hierarchy
      * @param $changefreq
      */
-    public function __construct(Config $config, $hierachy, $changefreq)
+    public function __construct(Config $config, $hierarchy, $changefreq)
     {
         $this->config = $config;
-        $this->hierachy = $hierachy;
+        $this->hierarchy = $hierarchy;
         $this->changefreq = $changefreq;
     }
 
@@ -32,8 +32,8 @@ class HomePage implements QueryInterface
         return [
             new Page(
                 $this->config->getShopUrl(),
-                $this->hierachy,
-                date('Y').'-'.date('m').'-'.date('d').'T'.date('h').':'.date('i').':'.date('s').'+00:00',
+                $this->hierarchy,
+                (new \DateTime())->format(\DateTime::ATOM),
                 $this->changefreq
             )
         ];

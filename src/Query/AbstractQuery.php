@@ -4,32 +4,34 @@ namespace IvobaOxid\OxidSiteMap\Query;
 
 use IvobaOxid\OxidSiteMap\Entity\Config;
 use IvobaOxid\OxidSiteMap\Entity\Page;
-use OxidEsales\Eshop\Core\Database\Adapter\DatabaseInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInterface;
 
 abstract class AbstractQuery implements QueryInterface
 {
 
-    protected $db;
-    protected $siteUrl;
-    protected $hierachy;
+    protected $queryBuilderFactory;
+    protected $hierarchy;
     protected $changefreq;
     protected $config;
 
-    abstract public function getSql(): string;
 
     /**
      * AbstractQuery constructor.
-     * @param DatabaseInterface $db
+     * @param QueryBuilderFactoryInterface $queryBuilderFactory
      * @param Config $config
-     * @param string $hierachy
+     * @param string $hierarchy
      * @param string $changefreq
      */
-    public function __construct(DatabaseInterface $db, Config $config, string $hierachy, string $changefreq)
-    {
-        $this->db         = $db;
-        $this->config     = $config;
-        $this->hierachy   = $hierachy;
-        $this->changefreq = $changefreq;
+    public function __construct(
+        QueryBuilderFactoryInterface $queryBuilderFactory,
+        Config $config,
+        string $hierarchy,
+        string $changefreq
+    ) {
+        $this->queryBuilderFactory = $queryBuilderFactory;
+        $this->config              = $config;
+        $this->hierarchy           = $hierarchy;
+        $this->changefreq          = $changefreq;
     }
 
     /**
@@ -37,13 +39,12 @@ abstract class AbstractQuery implements QueryInterface
      */
     public function getPages()
     {
-        $pages = [];
-
-        $result = $this->db->select($this->getSql());
-        if ($result !== false && $result->count() > 0) {
-            while (!$result->EOF) {
-                $pages[] = $this->createPage($result);
-                $result->fetchRow();
+        $pages  = [];
+        $query  = $this->getQuery($this->queryBuilderFactory->create());
+        $result = $query->execute()->fetchAll();
+        if ($result !== false) {
+            foreach ($result as $item) {
+                $pages[] = $this->createPage($item);
             }
         }
 
@@ -56,15 +57,15 @@ abstract class AbstractQuery implements QueryInterface
      */
     protected function createPage($result)
     {
-        $url = $result->fields['oxseourl'];
+        $url = $result['oxseourl'];
         if (empty($url)) {
-            $url = $result->fields['oxstdurl'];
+            $url = $result['oxstdurl'];
         }
 
         return new Page(
-            $this->config->getShopUrl().'/'.$url,
-            $this->hierachy,
-            date('Y').'-'.date('m').'-'.date('d').'T'.date('h').':'.date('i').':'.date('s').'+00:00',
+            $this->config->getShopUrl() . $url,
+            $this->hierarchy,
+            (new \DateTime())->format(\DateTime::ATOM),
             $this->changefreq
         );
     }

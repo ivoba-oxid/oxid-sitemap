@@ -2,26 +2,32 @@
 
 namespace IvobaOxid\OxidSiteMap\Query;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+
 /**
  * Class Tags
  * @package IvobaOxid\OxidSiteMap\Query
  */
 class Tags extends AbstractQuery
 {
-    private $sql = "SELECT seo.oxseourl
-                    FROM
-                        oxseo seo
-                    WHERE
-                        seo.oxseourl <> '' AND
-                        seo.oxstdurl LIKE '%%=oetagstagcontroller%%' AND
-                        seo.oxtype='dynamic' AND
-                        seo.oxexpired = 0 %s";
-
-    public function getSql(): string
+    public function getQuery(QueryBuilder $queryBuilder): QueryBuilder
     {
-        $this->sql = sprintf($this->sql, $this->config->getLangQuery());
+        $queryBuilder
+            ->select('oxseourl')
+            ->from('oxseo')
+            ->where(
+                "oxseourl <> ''",
+                'oxstdurl LIKE :controller',
+                'oxtype = :type',
+                'oxexpired = 0'
+            )
+            ->andWhere('oxlang IN (:langIds)')
+            ->setParameters([
+                'controller' => '%%=oetagstagcontroller%%',
+                'type'       => 'dynamic',
+                'langIds'    => $this->config->getLangIds(),
+            ]);
 
-        return $this->sql;
+        return $queryBuilder;
     }
-
 }

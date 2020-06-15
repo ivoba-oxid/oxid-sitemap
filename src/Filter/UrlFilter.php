@@ -10,18 +10,25 @@ use IvobaOxid\OxidSiteMap\Entity\Page;
  */
 class UrlFilter implements FilterInterface
 {
-    /**
-     * @var array
-     */
+    private $shopUrl;
     private $urls;
 
     /**
      * UrlFilter constructor.
+     * @param string $shopUrl
      * @param array $urls
      */
-    public function __construct(array $urls)
+    public function __construct(string $shopUrl, array $urls)
     {
-        $this->urls = array_flip($urls);
+        $this->shopUrl = $shopUrl;
+        $this->urls    = array_flip(
+            array_map(
+                function ($url) {
+                    return $this->shopUrl . $url;
+                },
+                $urls
+            )
+        );
     }
 
     /**
@@ -30,7 +37,6 @@ class UrlFilter implements FilterInterface
      */
     public function filter(Page $page)
     {
-        return isset($this->urls[$page->getUrl()]);
+        return isset($this->urls[$this->shopUrl . $page->getUrl()]);
     }
-
 }

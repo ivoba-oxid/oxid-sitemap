@@ -2,7 +2,6 @@
 
 namespace IvobaOxid\OxidSiteMap\Entity;
 
-
 class Page
 {
     private $url;

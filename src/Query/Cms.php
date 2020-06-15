@@ -2,29 +2,28 @@
 
 namespace IvobaOxid\OxidSiteMap\Query;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\DBAL\Connection;
+
 /**
  * Class Cms
  * @package IvobaOxid\OxidSiteMap\Query
  */
 class Cms extends AbstractQuery
 {
-    /**
-     * @var string
-     */
-    private $sql = "SELECT oxid,oxtitle,oxstdurl,oxseourl FROM oxcontents
-                    JOIN
-                      oxseo
-                    ON
-                      (oxseo.OXOBJECTID = oxcontents.OXID)
-                    WHERE oxactive = 1 AND
-                          oxfolder IN ('CMSFOLDER_USERINFO', 'CMSFOLDER_PRODUCTINFO') %s
-                    ORDER by oxtitle ASC";
-
-    public function getSql(): string
+    public function getQuery(QueryBuilder $queryBuilder): QueryBuilder
     {
-        $this->sql = sprintf($this->sql, $this->config->getLangQuery());
+        $folders = ['CMSFOLDER_USERINFO', 'CMSFOLDER_PRODUCTINFO'];
+        $queryBuilder
+            ->select('oxid', 'oxtitle', 'oxseo.oxstdurl', 'oxseo.oxseourl')
+            ->from('oxcontents')
+            ->join('oxcontents', 'oxseo', 'oxseo', 'oxseo.OXOBJECTID = oxcontents.OXID')
+            ->where('oxcontents.oxactive = :active')
+            ->andWhere('oxcontents.oxfolder IN (:folders)')
+            ->orderBy('oxcontents.oxtitle', 'ASC')
+            ->setParameter('folders', $folders, Connection::PARAM_STR_ARRAY)
+            ->setParameter('active', 1);
 
-        return $this->sql;
+        return $queryBuilder;
     }
-
 }

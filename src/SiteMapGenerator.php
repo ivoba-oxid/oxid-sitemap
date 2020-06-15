@@ -72,7 +72,6 @@ class SiteMapGenerator
         $xmlLines   = [];
         $xmlLines[] = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($pages as $page) {
-
             foreach ($this->filters as $filter) {
                 if ($filter->filter($page)) {
                     continue 2;
@@ -84,10 +83,10 @@ class SiteMapGenerator
                 $url = strtolower($url);
             }
 
-            $xmlLines[] = '<url><loc>'.$url.'</loc>
-                            <priority>'.$page->getPriority().'</priority>
-                            <lastmod>'.$page->getLastmod().'</lastmod>
-                            <changefreq>'.$page->getChangefreq().'</changefreq></url>';
+            $xmlLines[] = '<url><loc>' . $url . '</loc>
+                            <priority>' . $page->getPriority() . '</priority>
+                            <lastmod>' . $page->getLastmod() . '</lastmod>
+                            <changefreq>' . $page->getChangefreq() . '</changefreq></url>';
         }
         $xmlLines[] = '</urlset>';
 
@@ -99,23 +98,18 @@ class SiteMapGenerator
      */
     protected function createXmlFile($xml)
     {
-        $file = $this->config->getFilepath().'/'.$this->config->getFilename();
+        $file = $this->config->getFilepath() . '/' . $this->config->getFilename();
         $fp   = fopen($file, "w+");
         fwrite($fp, $xml);
         fclose($fp);
     }
 
-    /**
-     *
-     */
     public function generate()
     {
         $pages = [];
-
         foreach ($this->queries as $query) {
             $pages = array_merge($pages, $query->getPages());
         }
-
         $this->createXmlFile($this->generateXml($pages));
     }
 
