@@ -21,7 +21,7 @@ class Categories extends AbstractQuery
                      ->setParameters([
                          'active'  => 1,
                          'hidden'  => 0,
-                         'langIds' => $this->config->getLangIds(),
+                         'langIds' => implode(',', $this->config->getLangIds()),
                      ]);
 
         return $queryBuilder;

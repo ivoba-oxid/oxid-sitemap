@@ -25,7 +25,7 @@ class Tags extends AbstractQuery
             ->setParameters([
                 'controller' => '%%=oetagstagcontroller%%',
                 'type'       => 'dynamic',
-                'langIds'    => $this->config->getLangIds(),
+                'langIds'    => implode(',', $this->config->getLangIds()),
             ]);
 
         return $queryBuilder;
