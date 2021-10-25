@@ -1,5 +1,7 @@
 # Changelog
 
+### 2.3.0
+- added check if tag url is related to active article
 ### 2.2.0
 - added Homepage query
 ### 2.1.2
