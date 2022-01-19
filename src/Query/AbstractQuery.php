@@ -8,7 +8,6 @@ use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInt
 
 abstract class AbstractQuery implements QueryInterface
 {
-
     protected $queryBuilderFactory;
     protected $hierarchy;
     protected $changefreq;

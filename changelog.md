@@ -1,5 +1,7 @@
 # Changelog
 
+### 3.1.0
+- improved Tags query to only return active tags
 ### 3.0.0
 - raised version to Oxid 6.2 ("oxid-esales/oxideshop-ce": "^v6.5.4")
 - made the module a oxid-module not an addon, we need the DI support
