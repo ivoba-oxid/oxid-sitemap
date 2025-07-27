@@ -49,11 +49,11 @@ jobs:
 
       - name: Install dependencies
         if: matrix.dependencies == 'highest' && !matrix.experimental
-        run: composer update --prefer-dist --no-progress --prefer-stable
+        run: composer update --prefer-dist --no-progress
 
       - name: Install dependencies (lowest)
         if: matrix.dependencies == 'lowest' && !matrix.experimental
-        run: composer update --prefer-dist --no-progress --prefer-stable --prefer-lowest
+        run: composer update --prefer-dist --no-progress --prefer-lowest
 
       - name: Install dependencies (experimental PHP)
         if: matrix.experimental
