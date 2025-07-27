@@ -47,13 +47,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-${{ matrix.php-version }}-composer-
 
-      - name: Install dependencies
+      - name: Install dependencies (highest)
         if: matrix.dependencies == 'highest' && !matrix.experimental
-        run: composer update --prefer-dist --no-progress
+        run: composer update --prefer-dist --no-progress --no-interaction
 
       - name: Install dependencies (lowest)
         if: matrix.dependencies == 'lowest' && !matrix.experimental
-        run: composer update --prefer-dist --no-progress --prefer-lowest
+        run: composer update --prefer-dist --no-progress --no-interaction --prefer-lowest
 
       - name: Install dependencies (experimental PHP)
         if: matrix.experimental
