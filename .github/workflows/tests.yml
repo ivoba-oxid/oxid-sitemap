@@ -79,7 +79,7 @@ jobs:
           tools: composer:v2
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --prefer-stable --no-suggest
+        run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse src tests --level=max -c phpstan.neon
