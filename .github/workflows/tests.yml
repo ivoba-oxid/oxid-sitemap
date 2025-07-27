@@ -1,0 +1,91 @@
+name: Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+        dependencies: [highest, lowest]
+        include:
+          - php-version: '8.1'
+            experimental: false
+          - php-version: '8.2'
+            experimental: false
+          - php-version: '8.3'
+            experimental: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: xdebug
+          tools: composer:v2
+          
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-php-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-${{ matrix.php-version }}-composer-
+
+      - name: Install dependencies
+        if: matrix.dependencies == 'highest' && !matrix.experimental
+        run: composer update --prefer-dist --no-progress --prefer-stable
+
+      - name: Install dependencies (lowest)
+        if: matrix.dependencies == 'lowest' && !matrix.experimental
+        run: composer update --prefer-dist --no-progress --prefer-stable --prefer-lowest
+
+      - name: Install dependencies (experimental PHP)
+        if: matrix.experimental
+        run: |
+          composer config platform.php ${{ matrix.php-version }}
+          composer update --prefer-dist --no-progress --ignore-platform-reqs
+
+      - name: Run test suite
+        run: vendor/bin/phpunit
+
+
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --prefer-stable --no-suggest
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse src tests --level=max -c phpstan.neon
+
+      - name: Run PHP_CodeSniffer
+        run: composer phpcs
+
+      - name: Run PHPMD
+        run: vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode --suffixes php --exclude vendor/
