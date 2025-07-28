@@ -82,7 +82,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyse src tests --level=max -c phpstan.neon
+        run: vendor/bin/phpstan analyse src tests --level=max
 
       - name: Run PHP_CodeSniffer
         run: composer phpcs
