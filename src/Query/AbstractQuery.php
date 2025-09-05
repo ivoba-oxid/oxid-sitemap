@@ -2,25 +2,19 @@
 
 namespace IvobaOxid\OxidSiteMap\Query;
 
+use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\DBAL\ForwardCompatibility\Result;
 use IvobaOxid\OxidSiteMap\Entity\Config;
 use IvobaOxid\OxidSiteMap\Entity\Page;
 use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInterface;
 
 abstract class AbstractQuery implements QueryInterface
 {
-    protected $queryBuilderFactory;
-    protected $hierarchy;
-    protected $changefreq;
-    protected $config;
+    protected QueryBuilderFactoryInterface $queryBuilderFactory;
+    protected string $hierarchy;
+    protected string $changefreq;
+    protected Config $config;
 
-
-    /**
-     * AbstractQuery constructor.
-     * @param QueryBuilderFactoryInterface $queryBuilderFactory
-     * @param Config $config
-     * @param string $hierarchy
-     * @param string $changefreq
-     */
     public function __construct(
         QueryBuilderFactoryInterface $queryBuilderFactory,
         Config $config,
@@ -33,15 +27,17 @@ abstract class AbstractQuery implements QueryInterface
         $this->changefreq          = $changefreq;
     }
 
+    abstract public function getQuery(QueryBuilder $queryBuilder): QueryBuilder;
+
     /**
-     * @return array
+     * @return array<Page>
      */
-    public function getPages()
+    public function getPages(): array
     {
         $pages  = [];
         $query  = $this->getQuery($this->queryBuilderFactory->create());
-        $result = $query->execute()->fetchAll();
-        if ($result !== false) {
+        $result = $query->execute();
+        if ($result instanceof Result) {
             foreach ($result as $item) {
                 $pages[] = $this->createPage($item);
             }
@@ -51,10 +47,9 @@ abstract class AbstractQuery implements QueryInterface
     }
 
     /**
-     * @param $result
-     * @return Page
+     * @param array<string, mixed> $result
      */
-    protected function createPage($result)
+    protected function createPage(array $result): Page
     {
         $url = $result['oxseourl'];
         if (empty($url)) {

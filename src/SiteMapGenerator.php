@@ -37,7 +37,7 @@ class SiteMapGenerator
         foreach ($queries as $query) {
             $this->addQuery($query);
         }
-        
+
         foreach ($filters as $filter) {
             $this->addFilter($filter);
         }
@@ -74,7 +74,7 @@ class SiteMapGenerator
             }
 
             $url = $this->lowerUrls ? strtolower($page->getUrl()) : $page->getUrl();
-            
+
             $xmlLines[] = sprintf(
                 '<url>' .
                 '<loc>%s</loc>' .
@@ -104,7 +104,7 @@ class SiteMapGenerator
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -116,9 +116,9 @@ class SiteMapGenerator
     protected function createXmlFile(string $xml): void
     {
         $file = $this->config->getFilepath() . '/' . $this->config->getFilename();
-        
+
         $result = @file_put_contents($file, $xml);
-        
+
         if ($result === false) {
             throw new \RuntimeException(sprintf('Could not write sitemap to %s', $file));
         }
@@ -132,11 +132,11 @@ class SiteMapGenerator
     public function generate(): void
     {
         $pages = [];
-        
+
         foreach ($this->queries as $query) {
             $pages = array_merge($pages, $query->getPages());
         }
-        
+
         $this->createXmlFile($this->generateXml($pages));
     }
 

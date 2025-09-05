@@ -21,9 +21,10 @@ class Products extends AbstractQuery
     }
 
     /**
-     * @inheritdoc
+     * @param array{oxid: string, oxtimestamp: string} $result
+     * @return Page
      */
-    protected function createPage($result)
+    protected function createPage(array $result): Page
     {
         $article = new Article();
         $article->load($result['oxid']);

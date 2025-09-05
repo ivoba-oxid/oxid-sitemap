@@ -12,12 +12,9 @@ use IvobaOxid\OxidSiteMap\SiteMapGenerator;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 
 class SiteMapGeneratorTest extends TestCase
 {
-    use ProphecyTrait;
-
     private const TEST_FILEPATH = 'var/test';
     private const TEST_FILENAME = 'sitemap.xml';
     private const TEST_SITE_URL = 'https://example.com';
@@ -57,6 +54,7 @@ class SiteMapGeneratorTest extends TestCase
         $this->assertFileExists($filePath);
 
         $xmlContent = file_get_contents($filePath);
+        $this->assertIsString($xmlContent);
         $this->assertStringContainsString('<urlset', $xmlContent);
         $this->assertStringContainsString('https://example.com/page1', $xmlContent);
         $this->assertStringContainsString('1.0', $xmlContent);
@@ -88,7 +86,7 @@ class SiteMapGeneratorTest extends TestCase
 
         $filePath = $this->tempDir . '/' . self::TEST_FILEPATH . '/' . self::TEST_FILENAME;
         $xmlContent = file_get_contents($filePath);
-        
+        $this->assertIsString($xmlContent);
         $this->assertStringContainsString('https://example.com/included', $xmlContent);
         $this->assertStringNotContainsString('https://example.com/excluded', $xmlContent);
         
@@ -108,7 +106,7 @@ class SiteMapGeneratorTest extends TestCase
 
         $filePath = $this->tempDir . '/' . self::TEST_FILEPATH . '/' . self::TEST_FILENAME;
         $xmlContent = file_get_contents($filePath);
-        
+        $this->assertIsString($xmlContent);
         $this->assertStringContainsString(strtolower($testUrl), $xmlContent);
         
         // Clean up
@@ -138,10 +136,10 @@ class SiteMapGeneratorTest extends TestCase
     /**
      * Helper method to create a mock QueryInterface
      *
-     * @param array $pages Pages to return from getPages()
-     * @return QueryInterface|MockObject
+     * @param array<Page> $pages Pages to return from getPages()
+     * @return QueryInterface
      */
-    private function createMockQuery(array $pages = [])
+    private function createMockQuery(array $pages = []): QueryInterface
     {
         $query = $this->createMock(QueryInterface::class);
         $query->method('getPages')->willReturn($pages);

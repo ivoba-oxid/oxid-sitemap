@@ -4,19 +4,16 @@ namespace IvobaOxid\OxidSiteMap\Filter;
 
 use IvobaOxid\OxidSiteMap\Entity\Page;
 
-/**
- * Class UrlFilter
- * @package IvobaOxid\OxidSiteMap\Filter
- */
 class UrlFilter implements FilterInterface
 {
-    private $shopUrl;
-    private $urls;
+    private string $shopUrl;
+    /**
+     * @var array<string>
+     */
+    private array $urls;
 
     /**
-     * UrlFilter constructor.
-     * @param string $shopUrl
-     * @param array $urls
+     * @param array<string> $urls
      */
     public function __construct(string $shopUrl, array $urls)
     {
@@ -31,11 +28,7 @@ class UrlFilter implements FilterInterface
         );
     }
 
-    /**
-     * @param Page $page
-     * @return bool
-     */
-    public function filter(Page $page)
+    public function filter(Page $page): bool
     {
         return isset($this->urls[$this->shopUrl . $page->getUrl()]);
     }

@@ -25,8 +25,5 @@ $aModule = [
     'extend'      => [],
     'blocks'      => [],
     'settings'    => [],
-    'events'      => [
-        'onActivate'   => 'IvobaOxid\OxidSiteMap\Core\Events::onActivate',
-        'onDeactivate' => 'IvobaOxid\OxidSiteMap\Core\Events::onDeactivate',
-    ],
+    'events'      => [],
 ];

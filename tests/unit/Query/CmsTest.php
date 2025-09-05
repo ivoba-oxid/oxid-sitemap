@@ -11,16 +11,16 @@ use PHPUnit\Framework\TestCase;
 
 class CmsTest extends TestCase
 {
-    public function testGetPages()
+    public function testGetPages(): void
     {
-        $db = $this->prophesize(QueryBuilderFactoryInterface::class);
+        $db = $this->createMock(QueryBuilderFactoryInterface::class);
         $config = new Config(
             'filepath',
             'filename.xml',
             'http://shopurl'
         );
         $query = new Cms(
-            $db->reveal(),
+            $db,
             $config,
             '1',
             'daily'

@@ -2,20 +2,26 @@
 
 namespace IvobaOxid\OxidSiteMap\Entity;
 
+/**
+ * @phpstan-type LangConfig array{active: bool, baseId: string}
+ */
 class Config
 {
-    private $filepath;
-    private $filename;
-    private $shopUrl;
-    private $langQuery;
-    private $langIds;
+    private string $filepath;
+    private string $filename;
+    private string $shopUrl;
+    private string $langQuery;
+    /**
+     * @var array<int, string> Array of language base IDs
+     */
+    private array $langIds;
 
     /**
      * Config constructor.
      * @param string $filepath
      * @param string $filename
      * @param string $shopUrl
-     * @param array $langParams
+     * @param array<LangConfig> $langParams Array of language configurations
      */
     public function __construct(string $filepath, string $filename, string $shopUrl, array $langParams = [])
     {
@@ -23,16 +29,16 @@ class Config
         $this->filename = $filename;
         $this->shopUrl  = $shopUrl;
 
-        $aActiveLangIds = [];
+        $activeLangIds = [];
         foreach ($langParams as $key => $lang) {
             if ($lang['active']) {
-                $aActiveLangIds[] = $lang['baseId'];
+                $activeLangIds[] = $lang['baseId'];
                 $this->langIds[] = $lang['baseId'];
             }
         }
 
-        if ($aActiveLangIds && count($aActiveLangIds) > 0) {
-            $this->langQuery = ' AND OXLANG IN (' . implode(',', $aActiveLangIds) . ')';
+        if (count($activeLangIds) > 0) {
+            $this->langQuery = ' AND OXLANG IN (' . implode(',', $activeLangIds) . ')';
         }
     }
 
@@ -47,9 +53,9 @@ class Config
     }
 
     /**
-     * @return mixed
+     * @return array<int, string>
      */
-    public function getLangIds()
+    public function getLangIds(): array
     {
         return $this->langIds;
     }

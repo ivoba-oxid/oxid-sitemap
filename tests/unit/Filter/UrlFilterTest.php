@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class UrlFilterTest extends TestCase
 {
-    public function testFilter()
+    public function testFilter(): void
     {
         $shopurl = 'http://shopurl/';
         $urls    = [

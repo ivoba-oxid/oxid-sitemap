@@ -4,18 +4,11 @@ namespace IvobaOxid\OxidSiteMap\Entity;
 
 class Page
 {
-    private $url;
-    private $priority;
-    private $lastmod;
-    private $changefreq;
+    private string $url;
+    private string $priority;
+    private string $lastmod;
+    private string $changefreq;
 
-    /**
-     * Page constructor.
-     * @param string $url
-     * @param string $priority
-     * @param string $lastmod
-     * @param string $changefreq
-     */
     public function __construct(string $url, string $priority, string $lastmod, string $changefreq)
     {
         $this->url        = $url;

@@ -7,17 +7,11 @@ use IvobaOxid\OxidSiteMap\Entity\Page;
 
 class HomePage implements QueryInterface
 {
-    protected $hierarchy;
-    protected $changefreq;
-    protected $config;
+    protected string $hierarchy;
+    protected string $changefreq;
+    protected Config $config;
 
-    /**
-     * HomePage constructor.
-     * @param Config $config
-     * @param $hierarchy
-     * @param $changefreq
-     */
-    public function __construct(Config $config, $hierarchy, $changefreq)
+    public function __construct(Config $config, string $hierarchy, string $changefreq)
     {
         $this->config = $config;
         $this->hierarchy = $hierarchy;
@@ -25,9 +19,9 @@ class HomePage implements QueryInterface
     }
 
     /**
-     * @inheritdoc
+     * @return array<   Page>
      */
-    public function getPages()
+    public function getPages(): array
     {
         return [
             new Page(
